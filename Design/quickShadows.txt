@@ -1,0 +1,67 @@
+Very smal shooter styled game
+3d "shooter"
+simple room with ghosts and objects
+
+controls:
+Move mouse to move the flashlight
+esc to quit
+
+
+Level:
+One room level with everything in it
+
+
+player:
+not visible as first person view
+only flashlight visible
+
+
+python modules stuff:
+main:
+	instantiate showbase
+	create state handler (fsm)
+	start first state
+	start main loop (run)
+
+state handler (handles all game states)
+	in game state
+	exit game state (Highscore)
+
+world class:
+	load player
+	load world
+	load all the fancy shader stuff
+
+player class:
+	handle input
+
+
+Player input:
+move mouse left / right
+-> player rotates around himself
+move mouse up / down
+-> player looks up or down
+
+
+Enemies:
+Ghosts that come and go over time at various places
+
+
+HUD:
+show remaining energy of the lamp
+show catched ghosts
+
+
+Models:
+Flashlight
+Ghosts
+Level:
+	Ground (wooden and mybe a carped)
+	Walls
+	In room objects (Fireplace, candle, lamp, chairs, bookshelfes, table, door, window)
+	
+Shaders:
+    Shaders vor various objects (wood, metal, stone, etc...)
+    Normal map shader
+    glow shader for ghosts and maybe light sources
+    half transparrent/mirror shader thing for the window
