@@ -151,9 +151,9 @@ class BasePhysics():
         return np
         
         
-    def doRay(self, target):
+    def doRay(self, pfrom, target):
         
-        pFrom = Point3(0, 0, 0)
+        pFrom = pfrom
         
         result = self.engine.bulletWorld.rayTestClosest(pFrom, target)
         

@@ -91,7 +91,7 @@ class Engine():
         
         # Init Factory
         self.factory = Factory(self)
-        self.factory.parseLevelFile("test")
+        self.factory.parseLevelFile("leveltest")
         
         # Init Input
         

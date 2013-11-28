@@ -131,7 +131,7 @@ class BasePlayer():
     
     def setModel(self):
         """Attach the given model to the player"""
-        if self.model != "":
+        if self.model != " ":
             # Setup the visual model
             # Animated stuff should be added soon
             model = loader.loadModel(MODEL_DIR + self.model)
@@ -319,17 +319,62 @@ class BaseLight():
             render.clearLight(self.lightNP)
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+# BaseObject
+class bObject():
+    """THis builds the objects"""
+    def __init__(self, _engine, _type, _obj, _levelEgg):
+        """BaseObject Constructor"""
+        print "start building Object: ", _obj, " Type: ", _type
+        
+        # Engine
+        self.engine = _engine
+        self.factory = self.engine.factory
+        self.renderObjectsObj = self.engine.RenderObjects["object"]
+        self.levelEgg = _levelEgg
+        
+        # Object
+        self.object = _obj
+        
+        # Get the tags from the object
+        self.name = _obj.getTag("object")
+        self.id = int(_obj.getTag("id"))
+        self.mass = float(_obj.getTag("mass"))
+        self.isDynamic = _obj.getTag("isDynamic")
+        self.model = _obj.getTag("model")
+        self.script = _obj.getTag("script")
+        
+        # States
+        self.position = _obj.getPos(_levelEgg)
+        self.hpr = _obj.getHpr(_levelEgg)
+        self.scale = _obj.getScale(_levelEgg)
+        
+        # CollisionBody
+        self.bulletBody = None
+        
+        # Run Checkers
+        self.buildColBody()
+        
+        # Log
+        log.debug("Object Builder build: %s" % (self.name))
+        
+    def buildColBody(self):
+        """Build the collision body for the object if needed"""
+        
+        # This should be kept simple, if it contains col it makes a collision mesh otherwise none
+        if "col" in self.name:
+            """Build the collision body for this wall"""
+            self.bulletBody = self.factory.basePhysics.buildTriangleMesh(
+                        self.object, self.levelEgg, self.mass, self.isDynamic)
+
+            """Attach a model to the object if its dynamic"""
+            if self.model != " ":
+                # Setup the visual model
+                model = loader.loadModel(MODEL_DIR + self.model)
+                model.reparentTo(self.bulletBody)            
+        else:
+            self.object.reparentTo(self.renderObjectsObj)
+        
+        
     
     
     

@@ -1,0 +1,83 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "egg-trans -tbnall -o 'D:\Development\git\quickShadows\src\game\models\cube.egg' 'D:\Development\git\quickShadows\src\game\models\cube.egg'"
+}
+<Group> Cube {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      -7.68344 0 3.56714 1
+    }
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isDynamic {
+    True
+  }
+  <Tag> mass {
+    1.0
+  }
+  <Tag> model {
+    " "
+  }
+  <Tag> object {
+    obj1_col
+  }
+  <Tag> script {
+    " "
+  }
+  <VertexPool> Cube {
+    <Vertex> 0 {
+      -8.68344 -1 4.56714
+    }
+    <Vertex> 1 {
+      -8.68344 1 4.56714
+    }
+    <Vertex> 2 {
+      -8.68344 1 2.56714
+    }
+    <Vertex> 3 {
+      -8.68344 -1 2.56714
+    }
+    <Vertex> 4 {
+      -6.68344 1 4.56714
+    }
+    <Vertex> 5 {
+      -6.68344 1 2.56714
+    }
+    <Vertex> 6 {
+      -6.68344 -1 4.56714
+    }
+    <Vertex> 7 {
+      -6.68344 -1 2.56714
+    }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 1 4 5 2 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 4 6 7 5 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 6 0 3 7 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 3 2 5 7 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 6 4 1 0 <Ref> { Cube } }
+  }
+}

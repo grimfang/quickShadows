@@ -62,6 +62,7 @@ class TypeSamplerPanel(bpy.types.Panel):
         ## CHECK OBJECT TYPE SELECTION ##
         if bpy.context.scene.dropDownProp == "objectType":
             col.prop( scn, "datablock_id" )
+            col.prop( scn, "datablock_mass")
             col.prop( scn, "datablock_name" )
             col.prop( scn, "datablock_model" )
             col.prop( scn, "datablock_isDynamic" )
@@ -169,6 +170,7 @@ class SampleOperator(bpy.types.Operator):
             # Write the datablock like in logic editor
             bpy.ops.object.game_property_new(type='STRING', name="object")
             bpy.ops.object.game_property_new(type='INT', name="id")
+            bpy.ops.object.game_property_new(type='FLOAT', name="mass")
             bpy.ops.object.game_property_new(type='STRING', name="model")
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
             bpy.ops.object.game_property_new(type='STRING', name="script")
@@ -177,6 +179,7 @@ class SampleOperator(bpy.types.Operator):
             dict = activeObject.game.properties   
             dict['object'].value = bpy.context.scene.datablock_name
             dict['id'].value = bpy.context.scene.datablock_id
+            dict['mass'].value = bpy.context.scene.datablock_id
             dict['model'].value = bpy.context.scene.datablock_model
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['script'].value = bpy.context.scene.datablock_attachScript
@@ -333,6 +336,11 @@ if __name__ == '__main__':
     scnType.datablock_height = FloatProperty( name = "Height",
                                       default = 1.75, min = 0.0, max=3.0,
                                     description = "Set the height of your player" )
+
+    ## MASS
+    scnType.datablock_mass = FloatProperty( name = "Mass",
+                                      default = 0, min = 0.0, max=100.0,
+                                    description = "Set the mass of the object" )
                                     
     ## RADIUS - Player specific
     scnType.datablock_radius = FloatProperty( name = "Radius",
