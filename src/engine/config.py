@@ -47,6 +47,7 @@ Config script for engine related things.
 ## Paths
 LEVEL_DIR = "game/levels/"
 MODEL_DIR = "game/models/"
+SCRIPT_DIR = "game/scripts/"
 
 ## Types
 OBJECT_TYPES = ["player", "level", "object", "light", "sensor"]
