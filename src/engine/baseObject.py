@@ -102,6 +102,7 @@ class BasePlayer():
         #self.jumpHeight = float(_obj.getTag("jumpHeight"))
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
+        self.shader = _obj.getTag("shader")
         
         # States
         self.position = _obj.getPos(_levelEgg)
@@ -188,6 +189,7 @@ class BaseLevel():
         self.isDynamic = _obj.getTag("isDynamic")
         self.useBulletPlane = _obj.getTag("useBulletPlane")
         self.script = _obj.getTag("script")
+        self.shader = _obj.getTag("shader")
         
         # States
         self.position = _obj.getPos(_levelEgg)
@@ -264,6 +266,7 @@ class BaseLight():
         self.script = _obj.getTag("script")
         self.color = self.getColor(_obj.getTag("color"))
         self.lookAt = _obj.getTag("lookAt")
+        self.shader = _obj.getTag("shader")
         
         # NodePath
         self.lightNP = None
@@ -369,6 +372,7 @@ class bObject():
         self.model = _obj.getTag("model")
         self.model = " "
         self.script = _obj.getTag("script")
+        self.shader = _obj.getTag("shader")
         
         # States
         self.position = _obj.getPos(_levelEgg)
