@@ -12,6 +12,7 @@ Parser Tags:
 - jumpheight (Not Used Atm)
 - isDynamic
 - script
+- shader (split with ,)
 
 Control Types:
 controlType0 = fps cam/movement
@@ -28,6 +29,7 @@ Collision objects for walls and so forth need _col in the name
 - useBulletPlane (bool)
 - Add mass
 - script
+- shader (split with ,)
 
 [Lights Logic]
 - name
@@ -37,3 +39,9 @@ Collision objects for walls and so forth need _col in the name
 - isDynamic
 - script
 - color
+- shader (split with ,)
+
+[game] (gameInfo)
+- Mapname 
+- script
+- CamShaders (split with ,)

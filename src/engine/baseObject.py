@@ -72,6 +72,8 @@ class BaseGame():
         ## Will have to handle shader loading here.. 
         ## And then attach it to the camera
 
+        # myShader = Shader.load(Shader.SLGLSL, "myvertexshader.glsl", "myfragmentshader.glsl", "mygeometryshader.glsl")
+
 # BasePlayer
 class BasePlayer():
     """
