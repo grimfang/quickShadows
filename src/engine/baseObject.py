@@ -46,6 +46,32 @@ from config import *
 
 # BaseObject Types
 
+# BaseGame for info and other extras
+class BaseGame():
+    """
+    Base Game class for info regarding the map
+    """
+    def __init__(self, _engine, _type, _obj, _levelEgg):
+        print "start setting up game info: "
+
+        # Engine 
+        self.engine = _engine
+        self.factory = self.engine.factory
+
+        # Object
+        self.object = _obj
+
+        # Get the info tags from the dummy object
+        self.name = _obj.getTag("gameInfo")
+        self.script = _obj.getTag("script")
+        # CamShaders could be a list of shaders.. should support that
+        self.camShader = _obj.getTag("camshader")
+
+        print self.name, self.script, self.camShader
+
+        ## Will have to handle shader loading here.. 
+        ## And then attach it to the camera
+
 # BasePlayer
 class BasePlayer():
     """
@@ -341,6 +367,7 @@ class bObject():
         self.mass = float(_obj.getTag("mass"))
         self.isDynamic = _obj.getTag("isDynamic")
         self.model = _obj.getTag("model")
+        self.model = " "
         self.script = _obj.getTag("script")
         
         # States
@@ -370,7 +397,11 @@ class bObject():
             if self.model != " ":
                 # Setup the visual model
                 model = loader.loadModel(MODEL_DIR + self.model)
-                model.reparentTo(self.bulletBody)            
+                model.reparentTo(self.bulletBody)
+
+            else:
+                self.object.reparentTo(self.bulletBody)
+
         else:
             self.object.reparentTo(self.renderObjectsObj)
         

@@ -47,6 +47,7 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_turnSpeed" )
             col.prop( scn, "datablock_isDynamic" )
             col.prop( scn, "datablock_attachScript" )
+            col.prop( scn, "datablock_objShader")
         
         
         ## CHECK LEVEL TYPE SELECTION ##
@@ -57,6 +58,7 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_isDynamic" )
             col.prop( scn, "datablock_useBulletPlane" )
             col.prop( scn, "datablock_attachScript" )
+            col.prop( scn, "datablock_objShader")
         
         
         ## CHECK OBJECT TYPE SELECTION ##
@@ -67,6 +69,7 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_model" )
             col.prop( scn, "datablock_isDynamic" )
             col.prop( scn, "datablock_attachScript" )
+            col.prop( scn, "datablock_objShader")
         
         ## CHECK LIGHT TYPE SELECTION ##
         if bpy.context.scene.dropDownProp == "lightType":
@@ -77,18 +80,21 @@ class TypeSamplerPanel(bpy.types.Panel):
                 col.prop( scn, "datablock_model" )
                 col.prop( scn, "datablock_isDynamic" )
                 col.prop( scn, "datablock_attachScript" )
+                col.prop( scn, "datablock_objShader")
                 col.prop(scn, "datablock_color")
             
             if bpy.context.scene.dropDownLight == "directType":
                 col.prop( scn, "datablock_id" )
                 col.prop( scn, "datablock_name" )
                 col.prop( scn, "datablock_attachScript" )
+                col.prop( scn, "datablock_objShader")
                 col.prop(scn, "datablock_color")
                 
             if bpy.context.scene.dropDownLight == "ambientType":
                 col.prop( scn, "datablock_id" )
                 col.prop( scn, "datablock_name" )
                 col.prop( scn, "datablock_attachScript" )
+                col.prop( scn, "datablock_objShader")
                 col.prop(scn, "datablock_color")
                 
             if bpy.context.scene.dropDownLight == "spotType":
@@ -97,8 +103,15 @@ class TypeSamplerPanel(bpy.types.Panel):
                 col.prop( scn, "datablock_model" )
                 col.prop( scn, "datablock_isDynamic" )
                 col.prop( scn, "datablock_attachScript" )
+                col.prop( scn, "datablock_objShader")
                 col.prop(scn, "datablock_color")
                 col.prop( scn, "datablock_lookAt" )
+
+        ## CHECK GAME TYPE SELECTION ##
+        if bpy.context.scene.dropDownProp == "gameType":
+            col.prop( scn, "datablock_mapName")
+            col.prop( scn, "datablock_camShader")
+            col.prop( scn, "datablock_attachScript")
         
         
         col.operator( "bpt.sample_op" )
@@ -133,6 +146,7 @@ class SampleOperator(bpy.types.Operator):
             bpy.ops.object.game_property_new(type='FLOAT', name="turnSpeed")
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
             bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="shader")
             
             # now add the values to them
             dict = activeObject.game.properties   
@@ -147,6 +161,7 @@ class SampleOperator(bpy.types.Operator):
             dict['turnSpeed'].value = bpy.context.scene.datablock_turnSpeed
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['shader'].value = bpy.context.scene.datablock_objShader
             
         elif datablockType == "levelType":
             # Write the datablock like in logic editor
@@ -156,6 +171,7 @@ class SampleOperator(bpy.types.Operator):
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
             bpy.ops.object.game_property_new(type='BOOL', name="useBulletPlane")
             bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="shader")
             
             # now add the values to them
             dict = activeObject.game.properties   
@@ -165,6 +181,7 @@ class SampleOperator(bpy.types.Operator):
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['useBulletPlane'].value = bpy.context.scene.datablock_useBulletPlane
             dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['shader'].value = bpy.context.scene.datablock_objShader
             
         elif datablockType == "objectType":
             # Write the datablock like in logic editor
@@ -174,6 +191,7 @@ class SampleOperator(bpy.types.Operator):
             bpy.ops.object.game_property_new(type='STRING', name="model")
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
             bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="shader")
             
             # now add the values to them
             dict = activeObject.game.properties   
@@ -183,6 +201,19 @@ class SampleOperator(bpy.types.Operator):
             dict['model'].value = bpy.context.scene.datablock_model
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['shader'].value = bpy.context.scene.datablock_objShader
+
+        elif datablockType == "gameType":
+            # Write the datablock like in logic editor
+            bpy.ops.object.game_property_new(type='STRING', name="gameInfo")
+            bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="camshader")
+            
+            # now add the values to them
+            dict = activeObject.game.properties   
+            dict['gameInfo'].value = bpy.context.scene.datablock_mapName
+            dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['camshader'].value = bpy.context.scene.datablock_camShader
             
         elif datablockType == "lightType":
             # POINT LIGHT PROP STUFF
@@ -195,6 +226,7 @@ class SampleOperator(bpy.types.Operator):
                 bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
                 bpy.ops.object.game_property_new(type='STRING', name="script")
                 bpy.ops.object.game_property_new(type='STRING', name="color")
+                bpy.ops.object.game_property_new(type='STRING', name="shader")
             
                 # now add the values to them
                 dict = activeObject.game.properties   
@@ -205,6 +237,7 @@ class SampleOperator(bpy.types.Operator):
                 dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
                 dict['script'].value = bpy.context.scene.datablock_attachScript
                 dict['color'].value = bpy.context.scene.datablock_color
+                dict['shader'].value = bpy.context.scene.datablock_objShader
             
             # DIRECTIONAL LIGHT PROP STUFF
             if lightType == "directType":
@@ -214,6 +247,7 @@ class SampleOperator(bpy.types.Operator):
                 bpy.ops.object.game_property_new(type='INT', name="id")
                 bpy.ops.object.game_property_new(type='STRING', name="script")
                 bpy.ops.object.game_property_new(type='STRING', name="color")
+                bpy.ops.object.game_property_new(type='STRING', name="shader")
             
                 # now add the values to them
                 dict = activeObject.game.properties   
@@ -222,6 +256,7 @@ class SampleOperator(bpy.types.Operator):
                 dict['id'].value = bpy.context.scene.datablock_id
                 dict['script'].value = bpy.context.scene.datablock_attachScript
                 dict['color'].value = bpy.context.scene.datablock_color
+                dict['shader'].value = bpy.context.scene.datablock_objShader
             
             # AMBIENT LIGHT PROP STUFF
             if lightType == "ambientType":
@@ -231,6 +266,7 @@ class SampleOperator(bpy.types.Operator):
                 bpy.ops.object.game_property_new(type='INT', name="id")
                 bpy.ops.object.game_property_new(type='STRING', name="script")
                 bpy.ops.object.game_property_new(type='STRING', name="color")
+                bpy.ops.object.game_property_new(type='STRING', name="shader")
             
                 # now add the values to them
                 dict = activeObject.game.properties   
@@ -239,6 +275,7 @@ class SampleOperator(bpy.types.Operator):
                 dict['id'].value = bpy.context.scene.datablock_id
                 dict['script'].value = bpy.context.scene.datablock_attachScript
                 dict['color'].value = bpy.context.scene.datablock_color
+                dict['shader'].value = bpy.context.scene.datablock_objShader
             
             # SPOT LIGHT PROP STUFF
             if lightType == "spotType":
@@ -251,6 +288,7 @@ class SampleOperator(bpy.types.Operator):
                 bpy.ops.object.game_property_new(type='STRING', name="script")
                 bpy.ops.object.game_property_new(type='STRING', name="color")
                 bpy.ops.object.game_property_new(type='STRING', name="lookAt")
+                bpy.ops.object.game_property_new(type='STRING', name="shader")
             
                 # now add the values to them
                 dict = activeObject.game.properties   
@@ -262,6 +300,7 @@ class SampleOperator(bpy.types.Operator):
                 dict['script'].value = bpy.context.scene.datablock_attachScript
                 dict['color'].value = bpy.context.scene.datablock_color
                 dict['lookAt'].value = bpy.context.scene.datablock_lookAt
+                dict['shader'].value = bpy.context.scene.datablock_objShader
             
         return {'FINISHED'}
 
@@ -362,12 +401,28 @@ if __name__ == '__main__':
                                       default = 150.0, min = 0.0, max=1000.0,
                                     description = "Set the Walk Speed of your player" )
 
+    ## OBJECT SHADER
+    scnType.datablock_objShader = StringProperty(  name="Shader",
+                                            default=" ",
+                                description = "Name of the Shader")
+
+    ## GAME INFO TYPES
+    scnType.datablock_mapName = StringProperty(  name="Map Name",
+                                            default=" ",
+                                description = "Name of the Map")
+
+    ## GAME INFO SHADERS
+    scnType.datablock_camShader = StringProperty(  name="Camera Shaders",
+                                            default=" ",
+                                description = "List of shaders for the camera")
+
     # triplet setup.... ( return value, name, description )
     EnumProperty = bpy.props.EnumProperty
     datablockTypes= [("playerType", "Player", "Player Type Datablock"),
                     ("levelType", "Level", "Level Type Datablock"),
                     ("objectType", "Object", "Object Type Datablock"),
-                    ("lightType", "Light", "Light Type Datablock")]
+                    ("lightType", "Light", "Light Type Datablock"),
+                    ("gameType", "Game", "Game Type Datablock")]
                     
     enumProp = EnumProperty( name = "Datablock Type", items = datablockTypes,
                     description = "Choose a Datablock" )

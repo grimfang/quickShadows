@@ -82,6 +82,21 @@ class BasePhysics():
         
         self.engine.bulletWorld.attachCharacter(np.node())
         return np
+
+    def buildConeShape(self, _obj, _height, _radius, _pos, _hpr):
+        """Build a basic cone shape for the _obj"""
+        shape = BulletConeShape(_radius, _height, ZUp)
+
+        body = BulletRigidBodyNode("flashLight")
+        body.addShape(shape)
+
+        np = self.engine.BulletObjects["player"].attachNewNode(body)
+        np.setPos(_pos)
+        np.setHpr(_hpr)
+        np.setCollideMask(BitMask32.allOn())
+
+        self.engine.bulletWorld.attachRigidBody(np.node())
+        return np
         
     def doPlayerJump(self, player):
         """Allow the player to perform a jump"""

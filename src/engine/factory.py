@@ -40,7 +40,7 @@ from panda3d.core import NodePath
 # MeoTech Imports
 from config import *
 from basePhysics import BasePhysics
-from baseObject import BasePlayer, BaseLevel, BaseLight, bObject
+from baseObject import BasePlayer, BaseLevel, BaseLight, bObject, BaseGame
 
 #----------------------------------------------------------------------#
 
@@ -101,6 +101,10 @@ class Factory():
         # Sensor Type
         if _type == "sensor":
             self.engine.GameObjects["sensor"][_obj.getTag("sensor")] = BaseSensor()
+
+        if _type == "gameInfo":
+            self.engine.GameObjects["gameInfo"][_obj.getTag("gameInfo")] = BaseGame(self.engine,
+                            _type, _obj, _levelEgg)
         
         
         

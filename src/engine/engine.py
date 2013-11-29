@@ -65,6 +65,7 @@ class Engine():
         self.GameObjects["object"] = {}
         self.GameObjects["light"] = {}
         self.GameObjects["sensor"] = {}
+        self.GameObjects["gameInfo"] = {}
         
         # Create Render Object Holders for sorting stuff in sceneG.
         # nodepaths
@@ -91,7 +92,7 @@ class Engine():
         
         # Init Factory
         self.factory = Factory(self)
-        self.factory.parseLevelFile("leveltest")
+        self.factory.parseLevelFile("gameInfoTest")
         
         # Init Input
         
