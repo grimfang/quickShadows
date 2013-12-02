@@ -39,6 +39,7 @@ from panda3d.bullet import BulletCharacterControllerNode
 from panda3d.bullet import BulletCapsuleShape
 from panda3d.bullet import BulletPlaneShape
 from panda3d.bullet import BulletRigidBodyNode
+from panda3d.bullet import BulletConeShape
 from panda3d.bullet import BulletTriangleMesh, BulletTriangleMeshShape
 from panda3d.bullet import ZUp
 from panda3d.core import Vec3, BitMask32
@@ -83,7 +84,7 @@ class BasePhysics():
         self.engine.bulletWorld.attachCharacter(np.node())
         return np
 
-    def buildConeShape(self, _obj, _height, _radius, _pos, _hpr):
+    def buildConeShape(self, _height, _radius, _pos, _hpr):
         """Build a basic cone shape for the _obj"""
         shape = BulletConeShape(_radius, _height, ZUp)
 

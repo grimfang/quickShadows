@@ -118,9 +118,12 @@ class Engine():
     def engineLoop(self, task):
         """Handle Engine Related Tasks"""
         dt = globalClock.getDt()
+        #print dt, "Engine Loop"
         
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
+
+        # Check collisions
         
         return task.cont
 

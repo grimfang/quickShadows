@@ -26,9 +26,9 @@
 
 #----------------------------------------------------------------------#
 
-"""@ package Game
+"""@ package Player
 
-Start the Game.
+Setup player and related
 """
 
 # System Imports
@@ -37,63 +37,19 @@ import logging as log
 # Panda Engine Imports
 
 # MeoTech Imports
-from input import InputHandler
-from player import Player
 
 #----------------------------------------------------------------------#
 
-# Game
-class Game():
-    """The Game handles the actual game and custom scripts.
-    """
-    def __init__(self, _meotech):
-        
-        print "Game - init >>>"
-        
-        # Meotech
-        self.meotech = _meotech
-        
-        # Load Inputs
-        self.inputs = InputHandler(self)
-        
-        # Add GameLoop Task
-        taskMgr.add(self.gameLoop, "Game_loop")
-        
-        # Check the engine if we have a player.
-        if self.meotech.engine.GameObjects["player"]:
-            #if self.meotech.engine.GameObjects["player"].useBasicMovement:
-            self.hasPlayer = True
-            self.player = Player(self)
+class Player():
 
-        else:
-            self.hasPlayer = False
+	def __init__(self, _base):
+
+		self.game = _base
+
+		# Player object
+		self.playerObject = self.game.meotech.engine.GameObjects["player"]
 
 
-    def gameLoop(self, task):
-        
-        dt = globalClock.getDt()
-        #print dt, "Game Loop"
-        # Add player movement
-        # Check this if its slow change it...
-        if self.hasPlayer:
-            #self.meotech.engine.factory.basePhysics.useBasicPlayerMovement(dt)
-            self.inputs.getMouse(dt)
-        # Add Player camera handler
-        
-        return task.cont
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+		# Attach the flashlight cone to the player (self, _height, _radius, _pos, _hpr)
+		self.flashlightConeBody = self.game.meotech.engine.factory.basePhysics.buildConeShape(4.0, 1.5, 
+										self.playerObject.bulletBody.getPos(), self.playerObject.bulletBody.getHpr())
