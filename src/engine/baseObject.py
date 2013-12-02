@@ -72,6 +72,10 @@ class BaseGame():
         ## Will have to handle shader loading here.. 
         ## And then attach it to the camera
 
+        # Check how many shaders we have sep. with , and : like = vertexShader.glsl, fragmentshader, geoshader : anothervertexShader, anotehrFrag, Geo..
+
+    def loadCamShaders(self):
+        pass
         # myShader = Shader.load(Shader.SLGLSL, "myvertexshader.glsl", "myfragmentshader.glsl", "mygeometryshader.glsl")
 
 # BasePlayer
