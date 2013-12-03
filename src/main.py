@@ -51,10 +51,10 @@ loadPrcFileData("",
 )
 
 from direct.showbase.ShowBase import ShowBase
-
 # MeoTech Imports
 from engine.engine import Engine
 from game.game import Game
+from engine.config import *
 
 #----------------------------------------------------------------------#
 
@@ -86,8 +86,6 @@ class MeoTech(ShowBase):
         self.game = Game(self)
         
         # Debug stuff
-        wantDebug = True
-        
         if wantDebug:
             self.engine.showBulletDebug()
             print " "

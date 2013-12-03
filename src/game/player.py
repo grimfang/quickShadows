@@ -53,3 +53,6 @@ class Player():
 		# Attach the flashlight cone to the player (self, _height, _radius, _pos, _hpr)
 		self.flashlightConeBody = self.game.meotech.engine.factory.basePhysics.buildConeShape(4.0, 1.5, 
 										self.playerObject.bulletBody.getPos(), self.playerObject.bulletBody.getHpr())
+
+
+		

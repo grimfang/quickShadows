@@ -57,3 +57,6 @@ OBJECT_TYPES = ["gameInfo" ,"player", "level", "object", "light", "sensor"]
 GRAVITY_X = 0.0
 GRAVITY_Y = 0.0
 GRAVITY_Z = -9.81
+
+## Engine
+wantDebug = True
