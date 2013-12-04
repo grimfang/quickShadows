@@ -4,7 +4,7 @@
 # The MIT License (MIT)
 #
 # Copyright (c) <2013> <Martin de Bruyn>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -48,10 +48,10 @@ class InputHandler():
     """
     def __init__(self, _game):
         """InputHandler INIT"""
-        
+
         # Game
         self.game = _game
-        
+
         # Keyboard
         inputState.watchWithModifiers('forward', 'w')
         inputState.watchWithModifiers('left', 'a')
@@ -61,70 +61,71 @@ class InputHandler():
         inputState.watchWithModifiers('turnRight', 'e')
         inputState.watchWithModifiers('space', 'space')
         #inputState.watchWithModifiers('ctrl', 'lcontrol_down')
-        
+
         # App exit temp
         base.accept("escape", sys.exit)
-        
+
         # mouse
         self.winXhalf = base.win.getXSize()/2
         self.winYhalf = base.win.getYSize()/2
-        
+
         # Should move the camera stuff to the baseCamera.py
         base.camera.reparentTo(self.game.meotech.engine.GameObjects["player"].bulletBody)
         base.camLens.setFov(90)
         base.camLens.setNear(0.5)
-        
-        
+
+
         self.mouseSpeedX = 5
         self.mouseSpeedY = 0.2
         self.camP = 10
-        
-        
+
+
     def getMouse(self, dt):
-        
+
         player = self.game.meotech.engine.GameObjects["player"]
         flashlight = self.game.player.flashlightConeBody
         # Handle mouse
         md = base.win.getPointer(0)
         x = md.getX()
         y = md.getY()
-        
+
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
             player.bulletBody.node().setAngularMovement(omega)
-            flashlight.setH(flashlight, base.camera.getH())
+            #flashlight.setH(flashlight, base.camera.getH())
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
+            flashlight.setHpr(base.cam.getHpr())
             if cam <-80:
                 cam = -80
             elif cam > 90:
                 cam = 90
             base.cam.setP(cam)
             flashlight.setP(cam + 90)
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
