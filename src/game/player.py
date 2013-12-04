@@ -54,8 +54,9 @@ class Player():
 		self.flashlightConeBody = self.game.meotech.engine.factory.basePhysics.buildConeShape(4.0, 1.5, 
 										self.playerObject.bulletBody.getPos(), self.playerObject.bulletBody.getHpr())
 
-		self.flashlightConeBody.setP(90)
+		#self.flashlightConeBody.setP(90)
 		self.flashlightConeBody.reparentTo(self.playerObject.bulletBody)
+		self.flashlightConeBody.setPos(base.cam.getPos())
 
 
 		

@@ -92,7 +92,7 @@ class InputHandler():
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
             player.bulletBody.node().setAngularMovement(omega)
-            flashlight.setH(flashlight, omega)
+            flashlight.setH(flashlight, base.camera.getH())
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
             if cam <-80:
                 cam = -80
