@@ -4,7 +4,7 @@
 # The MIT License (MIT)
 #
 # Copyright (c) <2013> <Martin de Bruyn>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -50,14 +50,19 @@ class Engine():
     thing parsed from the level.egg.
     """
     def __init__(self, _meotech):
-        
+
         print "Engine - init >>>"
-        
+
         # MeoTehc
         self.meotech = _meotech
-        
+
+        # enable pandas auto shader
+        render.setShaderAuto()
+        # clear all lights from render
+        render.clearLight()
+
         ### Setup Engine Holders ###
-        
+
         # Create Game Object Holders
         self.GameObjects = {}
         self.GameObjects["player"] = None
@@ -66,41 +71,40 @@ class Engine():
         self.GameObjects["light"] = {}
         self.GameObjects["sensor"] = {}
         self.GameObjects["gameInfo"] = {}
-        
+
         # Create Render Object Holders for sorting stuff in sceneG.
         # nodepaths
         self.RenderObjects = {}
         self.BulletObjects = {}
-        
+
         # none visual
         self.BulletObjects["main"] = render.attachNewNode("Bullet_main")
         self.BulletObjects["player"] = self.BulletObjects["main"].attachNewNode("Bullet_player")
         self.BulletObjects["level"] = self.BulletObjects["main"].attachNewNode("Bullet_level")
         self.BulletObjects["object"] = self.BulletObjects["main"].attachNewNode("Bullet_object")
         self.BulletObjects["sensor"] = self.BulletObjects["main"].attachNewNode("Bullet_sensor")
-        
+
         # Visuals
         self.RenderObjects["level"] = render.attachNewNode("Render_level")
         self.RenderObjects["object"] = render.attachNewNode("Render_object")
         self.RenderObjects["light"] = render.attachNewNode("Render_light")
-        
+
         ### Engine Holders END ###
-        
+
         # Setup Bullet Physics
         self.bulletWorld = BulletWorld()
         self.bulletWorld.setGravity(Vec3(0, 0, 0))#GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
-        
+
         # Init Factory
         self.factory = Factory(self)
-        self.factory.parseLevelFile("gameInfoTest")
-        
+        self.factory.parseLevelFile("room")
+
         # Init Input
-        
+
         # Start Engine Loop
         # Controls Physics and other engine related Things
         taskMgr.add(self.engineLoop, "Engine_Loop")
-        
-    
+
     def showBulletDebug(self):
         """Show bullet Debug"""
         # Bullet DEBUG
@@ -111,20 +115,20 @@ class Engine():
         debugNode.showNormals(False)
         debugNP = render.attachNewNode(debugNode)
         debugNP.show()
-        
+
         self.bulletWorld.setDebugNode(debugNP.node())
-        
-    
+
+
     def engineLoop(self, task):
         """Handle Engine Related Tasks"""
         dt = globalClock.getDt()
         #print dt, "Engine Loop"
-        
+
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
 
         # Check collisions
-        
+
         return task.cont
 
 

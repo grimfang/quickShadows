@@ -75,7 +75,7 @@ class InputHandler():
         base.camLens.setNear(0.5)
 
 
-        self.mouseSpeedX = 5
+        self.mouseSpeedX = 15
         self.mouseSpeedY = 0.2
         self.camP = 10
 

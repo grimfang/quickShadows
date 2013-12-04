@@ -4,7 +4,7 @@
 # The MIT License (MIT)
 #
 # Copyright (c) <2013> <Martin de Bruyn>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -50,54 +50,54 @@ class Factory():
     lights, sensors... in them.
     """
     def __init__(self, _engine):
-        
+
         print "Factory - init >>>"
-        
+
         # Engine
         self.engine = _engine
-        
+
         # BasePhysics keeper of things
         self.basePhysics = BasePhysics(self.engine)
-        
+
     def parseLevelFile(self, _eggPath):
-        
+
         # Egg file
         levelEgg = loader.loadModel(LEVEL_DIR + _eggPath)
-        
+
         # Find objects in levelEgg
         levelObjects = levelEgg.findAllMatches('**')
-        
+
         for obj in levelObjects:
             for type in OBJECT_TYPES:
-                
+
                 if obj.hasTag(type):
                     self.buildObject(type, obj, levelEgg)
-                    
-    
+
+
     def buildObject(self, _type, _obj, _levelEgg):
-        
+
         # Build Object with _type
-        
+
         # Player Type
         if _type == "player":
             self.engine.GameObjects["player"] = BasePlayer(self.engine,
                             _type, _obj, _levelEgg)
-        
+
         # Level Type
         if _type == "level":
-            self.engine.GameObjects["level"][_obj.getTag("level")] = BaseLevel(self.engine, 
+            self.engine.GameObjects["level"][_obj.getTag("level")] = BaseLevel(self.engine,
                             _type, _obj, _levelEgg)
-            
+
         # Object Type
         if _type == "object":
-            self.engine.GameObjects["object"][_obj.getTag("object")] = bObject(self.engine, 
+            self.engine.GameObjects["object"][_obj.getTag("object")] = bObject(self.engine,
                             _type, _obj, _levelEgg)
-            
+
         # Light Type
         if _type == "light":
             self.engine.GameObjects["light"][_obj.getTag("light")] = BaseLight(
                             self.engine, _type, _obj, _levelEgg)
-            
+
         # Sensor Type
         if _type == "sensor":
             self.engine.GameObjects["sensor"][_obj.getTag("sensor")] = BaseSensor()
@@ -105,40 +105,40 @@ class Factory():
         if _type == "gameInfo":
             self.engine.GameObjects["gameInfo"][_obj.getTag("gameInfo")] = BaseGame(self.engine,
                             _type, _obj, _levelEgg)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
