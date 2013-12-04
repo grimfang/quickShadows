@@ -56,8 +56,10 @@ class Engine():
         # MeoTehc
         self.meotech = _meotech
 
-        # enable pandas auto shader
-        render.setShaderAuto()
+        # check if we can have good shaders
+        if base.win.getGsg().getSupportsShadowFilter():
+            # enable pandas auto shader
+            render.setShaderAuto()
         # clear all lights from render
         render.clearLight()
 
