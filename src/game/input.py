@@ -82,7 +82,8 @@ class InputHandler():
         
     def getMouse(self, dt):
         
-        player = self.game.meotech.engine.GameObjects["player"].bulletBody
+        player = self.game.meotech.engine.GameObjects["player"]
+        flashlight = self.game.player.flashlightConeBody
         # Handle mouse
         md = base.win.getPointer(0)
         x = md.getX()
@@ -90,14 +91,15 @@ class InputHandler():
         
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
-            self.game.meotech.engine.GameObjects["player"].bulletBody.node().setAngularMovement(omega)
-            self.game.player.flashlightConeBody.setH(omega)
+            player.bulletBody.node().setAngularMovement(omega)
+            flashlight.setH(flashlight, omega)
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
             if cam <-80:
                 cam = -80
             elif cam > 90:
                 cam = 90
             base.cam.setP(cam)
+            flashlight.setP(cam + 90)
             
         
         
