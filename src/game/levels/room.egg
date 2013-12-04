@@ -156,62 +156,62 @@
 }
 
 <Texture> Door {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Door.png"
+  "./Door.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Room {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Room.png"
+  "./Room.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Floor {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Floor.png"
+  "./Floor.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Outside {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Outside.png"
+  "./Outside.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Lamp {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Lamp.png"
+  "./Lamp.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> CupboardSmall {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/CupboardSmall.png"
+  "./CupboardSmall.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Table {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Table.png"
+  "./Table.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Candle {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Candle.png"
+  "./Candle.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Chair {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Chair.png"
+  "./Chair.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Fireplace {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Fireplace.png"
+  "./Fireplace.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> CupboardBig {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/CupboardBig.png"
+  "./CupboardBig.png"
   <Scalar> envtype { MODULATE }
 }
 
 <Texture> Window {
-  "/home/fireclaw/Arbeitsfläche/quickShadows/Design/graphic/Level/Window.png"
+  "./Window.png"
   <Scalar> envtype { MODULATE }
 }
 
