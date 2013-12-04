@@ -88,7 +88,7 @@ class Engine():
         
         # Setup Bullet Physics
         self.bulletWorld = BulletWorld()
-        self.bulletWorld.setGravity(Vec3(GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
+        self.bulletWorld.setGravity(Vec3(0, 0, 0))#GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
         
         # Init Factory
         self.factory = Factory(self)

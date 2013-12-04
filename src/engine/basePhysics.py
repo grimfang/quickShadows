@@ -94,7 +94,7 @@ class BasePhysics():
         np = self.engine.BulletObjects["player"].attachNewNode(body)
         np.setPos(_pos)
         np.setHpr(_hpr)
-        np.setCollideMask(BitMask32.allOn())
+        np.setCollideMask(BitMask32.allOff())
 
         self.engine.bulletWorld.attachRigidBody(np.node())
         return np
