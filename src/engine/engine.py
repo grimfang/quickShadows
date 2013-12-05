@@ -57,7 +57,7 @@ class Engine():
         self.meotech = _meotech
 
         # enable pandas auto shader
-        render.setShaderAuto()
+        #render.setShaderAuto()
         # clear all lights from render
         render.clearLight()
 

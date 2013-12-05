@@ -91,8 +91,10 @@ class MeoTech(ShowBase):
             print " "
             print "Panda Render.ls()"
             print "--------------------------------------------------------"
-            print render.ls()
+            #print render.ls()
             print "--------------------------------------------------------"
+            print base.win.getGsg().getSupportsShadowFilter()
+            print base.win.getGsg().getSupportsBasicShaders()
 
 
 meotech = MeoTech()
