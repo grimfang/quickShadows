@@ -80,10 +80,12 @@ class InputHandler():
         self.camP = 10
 
 
-    def getMouse(self, dt):
 
+    def getMouse(self, dt):
         player = self.game.meotech.engine.GameObjects["player"]
         flashlight = self.game.player.flashlightConeBody
+        flashlight_lamp = self.game.player.flashlight
+        flashlight_light = self.game.player.flashlightLight
         # Handle mouse
         md = base.win.getPointer(0)
         x = md.getX()
@@ -101,6 +103,10 @@ class InputHandler():
                 cam = 90
             base.cam.setP(cam)
             flashlight.setP(cam + 90)
+
+            flashlight_lamp.setZ(flashlight.getZ() - 0.6)
+            flashlight_lamp.setY(flashlight.getY() - 0.55)
+            flashlight_light.setHpr(flashlight_lamp.find("LightPos").getHpr() + 90)
 
 
 
