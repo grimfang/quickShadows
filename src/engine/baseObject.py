@@ -165,10 +165,71 @@ class BasePlayer():
     def setModel(self):
         """Attach the given model to the player"""
         if self.model != " ":
+            print MODEL_DIR + self.model
             # Setup the visual model
             # Animated stuff should be added soon
             model = loader.loadModel(MODEL_DIR + self.model)
             model.reparentTo(self.bulletBody)
+
+class BaseNPC():
+    """
+    BaseNPC:
+    This builds a not playable character.
+    """
+    def __init__(self, _engine, _type, _obj, _levelEgg):
+        """BaseNPC Contructor"""
+        print "start buidling: ", _obj, " Type: ", _type
+
+        # Engine
+        self.engine = _engine
+        self.factory = self.engine.factory
+
+        # Object
+        self.object = _obj
+
+        # Get the tags from the object
+        self.name = _obj.getTag("npc")
+        self.id = int(_obj.getTag("id"))
+        self.control = _obj.getTag("controlType")
+        self.model = _obj.getTag("model")
+        self.height = float(_obj.getTag("height"))
+        self.radius = float(_obj.getTag("radius"))
+        self.runSpeed = float(_obj.getTag("runSpeed"))
+        self.walkSpeed = float(_obj.getTag("walkSpeed"))
+        self.turnSpeed = float(_obj.getTag("turnSpeed"))
+        self.isDynamic = _obj.getTag("isDynamic")
+        self.script = _obj.getTag("script")
+        self.shader = _obj.getTag("shader")
+
+        # States
+        self.position = _obj.getPos(_levelEgg)
+        self.heading = _obj.getH(_levelEgg)
+
+        # NPCs Collision Body
+        self.bulletBody = self.factory.basePhysics.buildCharacterController(
+            self.height, self.radius, self.position, self.heading)
+        self.useBasicMovement = False
+
+        # Run checkers
+        self.setModel()
+        # TODO: Load scripts for this object...
+
+        # Log
+        log.debug("NPC Builder build: %s" % (self.name))
+
+    def setModel(self):
+        """Attach the given model to the NPC"""
+        if self.model != " ":
+            # Setup the visual model
+            # Animated stuff should be added soon
+            print MODEL_DIR + self.model
+            model = loader.loadModel(MODEL_DIR + self.model)
+            model.reparentTo(self.bulletBody)
+
+    def hide(self):
+        """Hide the model"""
+        self.bulletBody.hide()
+
 
 
 # BaseLevel
@@ -307,7 +368,7 @@ class BaseLight():
             directLight.setColor(VBase4(c[0], c[1], c[2], c[3]))
             directLight.setShadowCaster(True, 512, 512)
             dlnp = self.renderObjectsLight.attachNewNode(directLight)
-            dlnp.setHpr(0, -60, 0) # no idea why its like that.. but it works
+            #dlnp.setHpr(0, -60, 0) # no idea why its like that.. but it works
             self.lightNP = dlnp
             self.setLightSwitch(True)
 

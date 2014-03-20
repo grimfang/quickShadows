@@ -26,82 +26,33 @@
 
 #----------------------------------------------------------------------#
 
-"""@ package Game
+"""@ package Player
 
-Start the Game.
+Setup player and related
 """
 
 # System Imports
 import logging as log
 
 # Panda Engine Imports
+from direct.showbase.DirectObject import DirectObject
 
 # MeoTech Imports
-from input import InputHandler
-from player import Player
-from ghost import Ghost
 
 #----------------------------------------------------------------------#
 
-# Game
-class Game():
-    """The Game handles the actual game and custom scripts.
-    """
-    def __init__(self, _meotech):
+class Ghost(DirectObject):
 
-        print "Game - init >>>"
+    def __init__(self, _base, _id):
+        self.game = _base
 
-        # Meotech
-        self.meotech = _meotech
+        # Player object
+        self.ghostObject = self.game.meotech.engine.GameObjects["npc"]["ghost%02d"%(_id+1)]
+        self.accept("shootLight", self.checkHit)
 
-        # Load Inputs
-        self.inputs = InputHandler(self)
-
-        # Add GameLoop Task
-        taskMgr.add(self.gameLoop, "Game_loop")
-
-        # Check the engine if we have a player.
-        if self.meotech.engine.GameObjects["player"]:
-            #if self.meotech.engine.GameObjects["player"].useBasicMovement:
-            self.hasPlayer = True
-            self.player = Player(self)
-
-        else:
-            self.hasPlayer = False
-
-        # get the enemies and show them
-        self.npcList = []
-        if self.meotech.engine.GameObjects["npc"]:
-            self.amountOfNPCs = len(self.meotech.engine.GameObjects["npc"])
-            for npci in range(self.amountOfNPCs):
-                self.npcList.append(Ghost(self, npci))
-
-
-    def gameLoop(self, task):
-
-        dt = globalClock.getDt()
-        #print dt, "Game Loop"
-        # Add player movement
-        # Check this if its slow change it...
-        if self.hasPlayer:
-            #self.meotech.engine.factory.basePhysics.useBasicPlayerMovement(dt)
-            self.inputs.getMouse(dt)
-        # Add Player camera handler
-
-        return task.cont
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def checkHit(self, lightCone):
+        if self.game.meotech.engine.factory.basePhysics.checkCollision(self.ghostObject.bulletBody.node(),
+                                                                       lightCone.node()):
+            print "hit me!"
+            self.ghostObject.hide()
+            base.messenger.send("ghostHit")

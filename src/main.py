@@ -4,7 +4,7 @@
 # The MIT License (MIT)
 #
 # Copyright (c) <2013> <Martin de Bruyn>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -32,8 +32,6 @@ Handle the setup of the whole app.
 """
 
 # System Imports
-import sys
-import os
 import logging as log
 
 # Panda Engine Imports
@@ -43,7 +41,7 @@ loadPrcFileData("",
     window-title OWP - QuickShadows
     fullscreen 0
     win-size 1024 768
-    cursor-hidden 0
+    cursor-hidden 1
     show-frame-rate-meter 1
     #want-tk 1
     #want-directtools 1
@@ -61,30 +59,30 @@ from engine.config import *
 # Main App
 class MeoTech(ShowBase):
     """MeoTech Main Class.
-    
+
     Handles the setup of the whole app.
     Basically connects the MeoTech Engine with the Game Engine.
     """
-    
+
     def __init__(self):
-        
+
         # Create the main app Log file
         log.basicConfig(
                         filename="MeoTech.log",
                         level=log.DEBUG,
                         format="%(asctime)s %(levelname)s: %(message)s",
                         datafmt="%d-%m-%Y %H:%M:%S")
-        
-        
+
+
         # Init Panda
         ShowBase.__init__(self)
-        
+
         # Init Engine
         self.engine = Engine(self)
-        
+
         # Init Game
         self.game = Game(self)
-        
+
         # Debug stuff
         if wantDebug:
             self.engine.showBulletDebug()

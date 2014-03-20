@@ -48,10 +48,10 @@ Config script for engine related things.
 LEVEL_DIR = "game/levels/"
 MODEL_DIR = "game/models/"
 SCRIPT_DIR = "game/scripts/"
-SHADER_DIR = "game/shaders"
+SHADER_DIR = "game/shaders/"
 
 ## Types
-OBJECT_TYPES = ["gameInfo" ,"player", "level", "object", "light", "sensor"]
+OBJECT_TYPES = ["gameInfo" ,"player", "npc", "level", "object", "light", "sensor"]
 
 ## Physics
 GRAVITY_X = 0.0

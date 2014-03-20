@@ -36,13 +36,14 @@ import sys
 
 # Panda imports
 from direct.showbase.InputStateGlobal import inputState
+from direct.showbase.DirectObject import DirectObject
 
 # MeoTech imports
 
 
 #----------------------------------------------------------------------#
 
-class InputHandler():
+class InputHandler(DirectObject):
     """InputHandler.
     Keyboard stuff
     """
@@ -62,6 +63,8 @@ class InputHandler():
         inputState.watchWithModifiers('space', 'space')
         #inputState.watchWithModifiers('ctrl', 'lcontrol_down')
 
+        self.accept("mouse1", self.shootLight)
+
         # App exit temp
         base.accept("escape", sys.exit)
 
@@ -79,7 +82,10 @@ class InputHandler():
         self.mouseSpeedY = 0.2
         self.camP = 10
 
-
+    def shootLight(self):
+        print "shoot"
+        cone = self.game.player.flashlightConeBody
+        base.messenger.send("shootLight", [cone])
 
     def getMouse(self, dt):
         player = self.game.meotech.engine.GameObjects["player"]

@@ -63,6 +63,7 @@ class Engine():
         # clear all lights from render
         render.clearLight()
 
+
         ### Setup Engine Holders ###
 
         # Create Game Object Holders
@@ -70,6 +71,7 @@ class Engine():
         self.GameObjects["player"] = None
         self.GameObjects["level"] = {}
         self.GameObjects["object"] = {}
+        self.GameObjects["npc"] = {}
         self.GameObjects["light"] = {}
         self.GameObjects["sensor"] = {}
         self.GameObjects["gameInfo"] = {}
@@ -82,12 +84,14 @@ class Engine():
         # none visual
         self.BulletObjects["main"] = render.attachNewNode("Bullet_main")
         self.BulletObjects["player"] = self.BulletObjects["main"].attachNewNode("Bullet_player")
+        self.BulletObjects["npc"] = self.BulletObjects["main"].attachNewNode("Bullet_npc")
         self.BulletObjects["level"] = self.BulletObjects["main"].attachNewNode("Bullet_level")
         self.BulletObjects["object"] = self.BulletObjects["main"].attachNewNode("Bullet_object")
         self.BulletObjects["sensor"] = self.BulletObjects["main"].attachNewNode("Bullet_sensor")
 
         # Visuals
         self.RenderObjects["level"] = render.attachNewNode("Render_level")
+        self.RenderObjects["npc"] = render.attachNewNode("Render_npc")
         self.RenderObjects["object"] = render.attachNewNode("Render_object")
         self.RenderObjects["light"] = render.attachNewNode("Render_light")
 

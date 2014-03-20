@@ -40,7 +40,7 @@ from panda3d.core import NodePath
 # MeoTech Imports
 from config import *
 from basePhysics import BasePhysics
-from baseObject import BasePlayer, BaseLevel, BaseLight, bObject, BaseGame
+from baseObject import BasePlayer, BaseLevel, BaseLight, bObject, BaseGame, BaseNPC
 
 #----------------------------------------------------------------------#
 
@@ -87,6 +87,11 @@ class Factory():
         if _type == "level":
             self.engine.GameObjects["level"][_obj.getTag("level")] = BaseLevel(self.engine,
                             _type, _obj, _levelEgg)
+
+        # NPC Type
+        if _type == "npc":
+            self.engine.GameObjects["npc"][_obj.getTag("npc")] = BaseNPC(self.engine, _type,
+                            _obj, _levelEgg)
 
         # Object Type
         if _type == "object":
